@@ -102,6 +102,7 @@ function getCorrectAnswerFromId(questionId, answeredIDs) {
     }
 
     document.body.removeChild(div);
+
     return ansData;
 }
 
