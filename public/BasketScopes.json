@@ -1,0 +1,36 @@
+[{
+        "BasketScopeID": 9,
+        "Text": "Znalost pravidel provozu na pozemních komunikacích",
+        "QuestionCount": 10
+    },
+    {
+        "BasketScopeID": 10,
+        "Text": "Znalost zásad bezpečné jízdy a ovládání vozidla",
+        "QuestionCount": 4
+    },
+    {
+        "BasketScopeID": 11,
+        "Text": "Znalost dopravních značek, světelných a akustických signálů, výstražných světel, speciálních označení vozidel a osob, dopravních zařízení a zařízení pro provozní informace včetně náležitého chování řidiče, jež odpovídá jejich významu",
+        "QuestionCount": 3
+    },
+    {
+        "BasketScopeID": 12,
+        "Text": "Schopnost řešení dopravních situací",
+        "QuestionCount": 3
+    },
+    {
+        "BasketScopeID": 13,
+        "Text": "Znalost předpisů o podmínkách provozu vozidel na pozemních komunikacích",
+        "QuestionCount": 2
+    },
+    {
+        "BasketScopeID": 14,
+        "Text": "Znalost předpisů souvisejících s provozen na pozemních komunikacích",
+        "QuestionCount": 2
+    },
+    {
+        "BasketScopeID": 15,
+        "Text": "Znalost zdravotnické přípravy",
+        "QuestionCount": 1
+    }
+]
