@@ -240,6 +240,13 @@ export default {
 $wrongColor: #ff0000;
 $correctColor: #81b214;
 
+$backgroundColor: rgb(24, 25, 26);
+$secondaryBackgorundColor: rgb(30, 30, 30);
+$cardColor: rgb(36, 37, 38);
+$hoverColor: #3a3b3c;
+$primaryTextColor: #e5e6eb;
+$secondaryTextColor: #b0b3b8;
+
 * {
   margin: 0;
   padding: 0;
@@ -268,27 +275,25 @@ body,
 
   gap: 10px;
 
+  background: $backgroundColor;
+  color: $primaryTextColor;
+
   .previousAnswer {
     border: solid 3px black;
     padding: 5px;
 
     &.Correct {
-      border-color: $correctColor;
-      background: rgba($correctColor, 0.1);
+      border-color: rgba($correctColor, 0.5);
+      background: rgba($correctColor, 0.2);
     }
     &.Wrong {
-      border-color: $wrongColor;
-      background: rgba($wrongColor, 0.1);
+      border-color: rgba($wrongColor, 0.5);
+      background: rgba($wrongColor, 0.2);
     }
 
     span {
       font-weight: bold;
     }
-  }
-
-  .question {
-    border: solid 2px black;
-    padding: 0 5px;
   }
 
   .bottomInput {
@@ -302,6 +307,8 @@ body,
       outline: none;
       border: none;
       margin-bottom: 5px;
+      background: transparent;
+      color: $primaryTextColor;
     }
 
     .inputContainer {
@@ -316,11 +323,24 @@ body,
         width: 100px;
         box-sizing: border-box;
         height: 100%;
+        background: darken($hoverColor, 10%);
+        color: $primaryTextColor;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        transition: 0.1s linear background;
+
+        &:hover {
+          background: $hoverColor;
+        }
       }
     }
   }
 
   .question {
+    padding: 0 5px;
+    background: $secondaryBackgorundColor;
+
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -348,8 +368,9 @@ body,
 
     video,
     img {
-      height: 100%;
-      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: 100%;
     }
 
     .answer-container {
@@ -358,32 +379,32 @@ body,
 
       .answer {
         display: flex;
-        border: solid 2px rgba(0, 0, 0, 0.5);
+        background: $cardColor;
         border-radius: 3px;
         box-sizing: border-box;
         align-items: center;
         margin: 5px;
         cursor: pointer;
         text-align: start;
+        border: solid 2px transparent;
 
         transition: all 0.1s linear;
 
         &:hover {
-          background: rgba(0, 0, 0, 0.05);
-          border-color: black;
+          background: $hoverColor;
         }
 
         &.correct {
-          border-color: $correctColor;
-          background: rgba($correctColor, 0.1);
+          border-color: rgba($correctColor, 0.5);
+          background: rgba($correctColor, 0.2);
         }
         &.wrong {
-          border-color: $wrongColor;
-          background: rgba($wrongColor, 0.1);
+          border-color: rgba($wrongColor, 0.5);
+          background: rgba($wrongColor, 0.2);
         }
 
         & > span {
-          border: solid 2px rgba(0, 0, 0, 0.5);
+          border: solid 2px $secondaryTextColor;
           padding: 10px;
           margin: 4px;
           margin-right: 10px;
@@ -396,7 +417,6 @@ body,
   }
 
   .basketScopes {
-    border: solid 2px black;
     border-radius: 10px;
     padding: 5px;
     margin-top: 10px;
@@ -421,23 +441,23 @@ body,
       border: solid 3px transparent;
 
       &:hover {
-        background: rgba($color: #000000, $alpha: 0.03);
+        background: $hoverColor;
       }
 
       &:not(:last-child) {
-        border-bottom-color: rgba(0, 0, 0, 0.2);
+        border-bottom-color: rgba(192, 192, 192, 0.2);
         margin-bottom: 2px;
       }
 
       &.selected {
-        background: rgba($color: #000000, $alpha: 0.05);
-        border-color: rgba($color: #000000, $alpha: 0.5);
+        background: #525355;
       }
 
       text-align: start;
 
       .count {
         align-self: flex-end;
+        color: $secondaryTextColor;
       }
     }
   }
