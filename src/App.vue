@@ -24,15 +24,25 @@
         / {{ json.length - 1 }}
       </div>
       <div class="inputContainer">
-        <button :disabled="selectedPage < 1" @click="previousQuestion()">
-          Previous
-        </button>
-        <button
-          :disabled="selectedPage > json.length - 2"
-          @click="nextQuestion()"
-        >
-          Next
-        </button>
+        <div class="pair">
+          <button :disabled="selectedPage < 1" @click="previousQuestion()">
+            &larr; Previous
+          </button>
+          <button
+            :disabled="selectedPage > json.length - 2"
+            @click="nextQuestion()"
+          >
+            Next &rarr;
+          </button>
+        </div>
+        <div class="pair">
+          <button @click="getFirstWrongAnswer()">
+            Wrong Answer
+          </button>
+          <button @click="getRandomQuestion()">
+            Random
+          </button>
+        </div>
       </div>
     </div>
     <div class="basketScopes">
@@ -126,19 +136,21 @@ export default {
     getAnswers() {
       if (localStorage.getItem("Answers") != null) {
         this.answered = JSON.parse(localStorage.getItem("Answers"));
-        console.log("Loaded");
-        for (let i = 0; i < this.answered.length; i++) {
-          if (!this.answered[i].correct) {
-            this.selectedPage = i;
-            return;
-          }
-        }
+        this.getFirstWrongAnswer();
         return;
       }
 
       this.answered = [];
       for (let i = 0; i < this.json.length; i++) {
         this.answered[i] = { correct: false };
+      }
+    },
+    getFirstWrongAnswer() {
+      for (let i = 0; i < this.answered.length; i++) {
+        if (!this.answered[i].correct) {
+          this.selectedPage = i;
+          return;
+        }
       }
     },
     correctAnswer(target, answer) {
@@ -214,6 +226,12 @@ export default {
       this.selectedPage = index;
       this.loadImages();
     },
+    getRandomQuestion() {
+      let cur = this.selectedPage;
+      while (cur == this.selectedPage) {
+        this.gotoPage(Math.floor(Math.random() * this.json.length));
+      }
+    },
   },
   async created() {
     document.body.onkeydown = this.handleKeybaord;
@@ -268,7 +286,7 @@ body,
   color: #2c3e50;
 
   display: grid;
-  grid-template-rows: 5vh 78vh 10vh;
+  grid-template-rows: 5vh 78vh auto;
 
   padding: 20px;
   box-sizing: border-box;
@@ -312,15 +330,22 @@ body,
     }
 
     .inputContainer {
-      width: 30vh;
+      width: 100%;
+      gap: 10px;
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-evenly;
       position: relative;
 
+      .pair{
+        display: flex;
+        gap: 5px;
+      }
+
       button {
         padding: 15px;
-        width: 100px;
+        width: fit-content;
         box-sizing: border-box;
         height: 100%;
         background: darken($hoverColor, 10%);
@@ -340,6 +365,7 @@ body,
   .question {
     padding: 0 5px;
     background: $secondaryBackgorundColor;
+    overflow-y: auto;
 
     display: flex;
     flex-direction: column;
