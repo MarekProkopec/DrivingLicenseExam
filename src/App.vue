@@ -148,7 +148,7 @@ export default {
     getFirstWrongAnswer() {
       for (let i = 0; i < this.answered.length; i++) {
         if (!this.answered[i].correct) {
-          this.selectedPage = i;
+          this.gotoPage(i);
           return;
         }
       }
