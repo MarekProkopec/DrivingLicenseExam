@@ -146,7 +146,7 @@ export default {
       }
     },
     getFirstWrongAnswer() {
-      for (let i = 0; i < this.answered.length; i++) {
+      for (let i = this.selectedPage; i < this.answered.length; i++) {
         if (!this.answered[i].correct) {
           this.gotoPage(i);
           return;
@@ -338,7 +338,7 @@ body,
       justify-content: space-evenly;
       position: relative;
 
-      .pair{
+      .pair {
         display: flex;
         gap: 5px;
       }
@@ -355,8 +355,13 @@ body,
         cursor: pointer;
         transition: 0.1s linear background;
 
-        &:hover {
+        &:hover:not(:disabled) {
           background: $hoverColor;
+        }
+
+        &:disabled {
+          color: rgba($primaryTextColor, 0.2);
+          cursor: not-allowed;
         }
       }
     }
@@ -378,12 +383,17 @@ body,
 
     .image-frame {
       height: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       & > div {
         height: 100%;
         width: auto;
-        display: flex;
+        display: flex !important;
         position: relative;
+        align-items: center;
+        justify-content: center;
 
         & > a {
           position: absolute;
