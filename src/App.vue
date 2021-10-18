@@ -63,6 +63,9 @@
         <p class="count">Count: {{ item.count }}</p>
       </div>
     </div>
+    <button @click="clearData()" class="clearLocalData">
+      Clear Local Data
+    </button>
   </div>
   <div v-else>
     Loading Data...
@@ -81,6 +84,12 @@ export default {
     };
   },
   methods: {
+    clearData() {
+      if (confirm("Do you really want to clear Local data?")) {
+        localStorage.clear();
+        this.getAnswers();
+      }
+    },
     previousQuestion() {
       if (this.selectedPage <= 0) return;
 
@@ -296,6 +305,28 @@ body,
   background: $backgroundColor;
   color: $primaryTextColor;
 
+  button {
+    padding: 15px;
+    width: fit-content;
+    box-sizing: border-box;
+    height: 100%;
+    background: darken($hoverColor, 10%);
+    color: $primaryTextColor;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: 0.1s linear background;
+
+    &:hover:not(:disabled) {
+      background: $hoverColor;
+    }
+
+    &:disabled {
+      color: rgba($primaryTextColor, 0.2);
+      cursor: not-allowed;
+    }
+  }
+
   .previousAnswer {
     border: solid 3px black;
     padding: 5px;
@@ -341,28 +372,6 @@ body,
       .pair {
         display: flex;
         gap: 5px;
-      }
-
-      button {
-        padding: 15px;
-        width: fit-content;
-        box-sizing: border-box;
-        height: 100%;
-        background: darken($hoverColor, 10%);
-        color: $primaryTextColor;
-        border-radius: 5px;
-        border: none;
-        cursor: pointer;
-        transition: 0.1s linear background;
-
-        &:hover:not(:disabled) {
-          background: $hoverColor;
-        }
-
-        &:disabled {
-          color: rgba($primaryTextColor, 0.2);
-          cursor: not-allowed;
-        }
       }
     }
   }
@@ -496,6 +505,10 @@ body,
         color: $secondaryTextColor;
       }
     }
+  }
+
+  button.clearLocalData {
+    justify-self: end;
   }
 }
 </style>
